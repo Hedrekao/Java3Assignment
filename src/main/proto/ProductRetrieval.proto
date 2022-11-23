@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "via.sdj3.animalregistrationapi.protobuf";
+
+// service definitions
+service ProductsService
+{
+  rpc createProduct(ProductMessageCreate) returns (ProductMessage);
+  rpc getProductById(IdMessage)  returns (ProductMessage);
+  rpc deleteProduct(IdMessage) returns(NullMessage);
+  rpc getAll(NullMessage) returns(ProductListMessage);
+  rpc getByAnimal(IdMessage) returns(ProductListMessage);
+
+}
+message AnimalMessage {
+  int32 registrationNumber = 1;
+  double weight =2;
+  string date = 3;
+  string origin =4;
+}
+
+message AnimalListMessage{
+  repeated AnimalMessage animals= 1;
+}
+
+message ProductMessage {
+  int32 id = 1;
+  double price =2;
+  string name = 3;
+  AnimalListMessage animals =4;
+}
+
+message ProductMessageCreate {
+  int32 id = 1;
+  double price =2;
+  string name = 3;
+  repeated int32 animalsIds =4;
+}
+
+message IdMessage {
+  int32 id = 1;
+
+}
+
+message ProductListMessage{
+  repeated ProductMessage animals= 1;
+}
+
+
+
+message NullMessage
+{
+}
+
